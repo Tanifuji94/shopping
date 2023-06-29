@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="{{url_for('static', filename='favicon/home.ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
+    <title>お問い合わせ完了</title>
+</head>
+<body>
+    <h1 align="center" style="margin-top: 200px">お問い合わせありがとうございました、{{ name }}さん。<br>引き続きお買い物をお楽しみください。</h1>
+    <div align="center" style="margin-top: 30px">
+        <a href="{{url_for('mypage')}}" class="btn btn-border">戻る</a>
+    </div>
+</body>
+</html>

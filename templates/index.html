@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <link rel="icon" href="{{url_for('static', filename='favicon/home.ico')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
     <title>ショッピングサイト</title>
 </head>
 <body>
-    <h3 text-align: center;>ログイン画面</h3>
+    <h1 align="center">ログイン画面</h1>
+    <h3 align="center">ユーザー登録がお済みのお客様はユーザー名とパスワードをご入力の上、<br>
+        ログインボタンをクリックしてください。</h3>
+    <div style="margin: 0 auto; padding: 30px; border: 7px double #333333; border-radius: 30px; width: 35%;">
     {%  if error != null %}
-        <p style="color:red">{{error}}</p>
+        <p style="color:red; text-align: center">{{error}}</p>
     {% endif %}
     {%  if msg != null %}
-        <p style="color:blue">{{msg}}</p>
+        <p style="color:blue; text-align: center">{{msg}}</p>
     {% endif %}
     <form class="user" action="{{url_for('login')}}" method="post">
-        ユーザ名:<input type="text" text-align: center; name="username" value="{{data.user_name if data is defined else ''}}"><br>
-        パスワード:<input type="password" name="password" value="{{data.password if data is defined else ''}}"><br>
-        <button type="submit">ログイン</button>
+        <h3>ユーザー名:<input type="text" name="username" value="{{data.user_name if data is defined else ''}}"></h3><br>
+        <h3>パスワード:<input type="password"  name="password" value="{{data.password if data is defined else ''}}"></h3><br>
+        <div align="center" class="login">
+        <button class="button" type="submit">ログイン</button>
+        </div>
     </form>
-    <a href="{{url_for('register_form')}}">新規登録</a>
-    </body>
+</div>
+<div align="center" style="margin-top: 30px">
+    <a href="{{url_for('register_form')}}" class="btn btn-border">新規登録</a>
+    </div>
+</body>
 </html>

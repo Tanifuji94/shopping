@@ -1,7 +1,50 @@
-user{
-	text-align: center;
-
-}
-h3{
+.user{
 	text-align: center;
 }
+.right{
+	padding: 5px;
+	color: grey;
+}
+h1{
+	font-size: 250%;
+}
+.login{
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.search{
+	text-align: center;
+}
+a.btn-border {
+	padding: 1em 4em;
+	margin-top: auto;
+	color: #555555	;
+	border: 2px solid #000;
+	border-radius: 0;
+	background: #fff;
+  }
+  
+  a.btn-border:hover {
+	margin-top: 1000px;
+	color: #fff;
+	background: #000;
+	size: 10px;
+  }
+  .button {
+	padding: 1em 5em;
+	text-decoration: none;
+	background: white;
+	font-style: black;
+	border-radius: 2px;
+  }
+  
+  .button:active{
+	box-shadow:inset -2px -2px 3px rgba(255, 255, 255, .6),
+	  inset 2px 2px 3px rgba(0, 0, 0, .6);
+  }
+  
+  .button:hover{
+	color: #fff;
+	size: 10px;
+	background-color: black
+  }

@@ -52,6 +52,19 @@ def sample_search():
 def register_form():
     return render_template('register.html')
 
+@app.route('/question')
+def question_form():
+    return render_template('question.html')
+
+@app.route('/submit', methods=['POST'])
+def submit():
+
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+
+    return render_template('thank.html', name=name)
+
 @app.route('/register_exe', methods=['POST'])
 def register_exe():
     user_name = request.form.get('username')

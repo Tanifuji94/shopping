@@ -12,18 +12,55 @@
         <a class="navbar-brand"><font size=6>ショッピング</font></a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
+            
             <a class="nav-link" href="">商品一覧</a>
-            <a class="nav-link" href="">おススメ</a>
+            <a class="nav-link" href="">カート</a>
             <a class="nav-link">検索</a>
-            <form action="" method="get" border=1 height=center>
+              <form action="" method="get" border=1 >
               <input type="text" name="keyword">
-              <button type="submit" border=1>検索</button>
+              <button type="submit">検索</button>
             </form>
           </div>
         </div>
+        <a class="right" href="{{url_for('question_form')}}">お問い合わせ</a>
+        <div align="right">
+          <a class="right" href="{{url_for('logout')}}">ログアウト</a>
+          </div>          
         </div>
         </nav>
+        <main>
+          <section class="product-list">
+            <h2>商品一覧</h2>
+            <ul>
+              <li>
+                <img src="product1.jpg" alt="商品1">
+                <h3>商品1</h3>
+                <p>商品の説明や詳細などが記載されます。</p>
+                <button>カートに追加</button>
+              </li>
+              <li>
+                <img src="product2.jpg" alt="商品2">
+                <h3>商品2</h3>
+                <p>商品の説明や詳細などが記載されます。</p>
+                <button>カートに追加</button>
+              </li>
+              <!-- 他の商品のリストを追加 -->
+            </ul>
+          </section>
+      
+          <section class="cart">
+            <h2>カート</h2>
+            <ul>
+              <!-- カート内の商品のリストを表示 -->
+            </ul>
+            <button>注文する</button>
+          </section>
+        </main>
     </header>
-    <a href="{{url_for('logout')}}">ログアウト</a>
+    <footer class="footer bg-light fixed-bottom">
+      <div class="container">
+        <p class="text-muted text-center">© 2023 ショッピングサイト</p>
+      </div>
+    </footer>
 </body>
 </html>

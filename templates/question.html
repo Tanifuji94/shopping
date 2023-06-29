@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="{{url_for('static', filename='favicon/home.ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
+    <title>お問い合わせ</title>
+</head>
+<body>
+    <h1 align="center">お問い合わせ</h1>
+    <div style="margin: 0 auto; padding: 30px; border: 7px double #333333; border-radius: 30px; width: 50%;">
+    <form action="/submit" method="post" align="center">
+        <label for="name">名前:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="email">メールアドレス:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="message">お問い合わせ内容:</label><br>
+        <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
+        <button type="submit" value="送信" class="button">送信</button>
+    </form>
+</div>
+</body>
+</html>
