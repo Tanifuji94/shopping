@@ -56,6 +56,26 @@ def register_form():
 def question_form():
     return render_template('question.html')
 
+@app.route('/list')
+def sample_list():
+    goods_list = db.select_all_goods()
+    return render_template('list.html', goods=goods_list)
+
+
+@app.route('/list_exe', methods=['POST'])
+def list_exe():
+    name = request.form.get('name')
+    price = request.form.get('price')
+    explanation = request.form.get('explanation')
+    category = request.form.get('category')
+    stock = request.form.get('stock')
+    
+    db.insert_goods(name, price, explanation, category, stock)
+    
+    goods_list = db.select_all_goods()
+    
+    return render_template('list.html', goods=goods_list)
+
 @app.route('/submit', methods=['POST'])
 def submit():
 

@@ -6,7 +6,8 @@
     <title>お問い合わせ</title>
 </head>
 <body>
-    <h1 align="center">お問い合わせ</h1>
+    <h1 align="center">お問い合わせ画面</h1>
+    <h3 align="center">ご不明な点等がございましたらお問い合わせ願います。</h3>
     <div style="margin: 0 auto; padding: 30px; border: 7px double #333333; border-radius: 30px; width: 50%;">
     <form action="/submit" method="post" align="center">
         <label for="name">名前:</label>
@@ -17,6 +18,9 @@
         <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
         <button type="submit" value="送信" class="button">送信</button>
     </form>
+</div>
+<div align="center" style="margin-top: 30px">
+    <a href="{{url_for('mypage')}}" class="btn btn-border">戻る</a>
 </div>
 </body>
 </html>

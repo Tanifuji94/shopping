@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/register.css')}}">
+{% endblock %}
+
+{% block content %}
+  <h1>商品登録</h1>
+  <form action="{{url_for('list_exe')}}" method="post">
+    商品名：<input type="text" name="name"><br>
+    価格：<input type="text" name="price"><br>
+    商品説明：<input type="text" name="explanation"><br>
+    カテゴリー：<input type="text" name="category"><br>
+    在庫：<input type="number" name="stock"><br>
+    <button type="submit">登録</button>
+  </form>
+{% endblock %}

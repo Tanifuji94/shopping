@@ -17,6 +17,30 @@ def get_hash(password, salt):
     hashed_password = hashlib.pbkdf2_hmac('sha256', b_pw, b_salt, 1000).hex()
     return hashed_password
 
+def select_all_goods():
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    sql = 'SELECT name, price, explanation, category, stock FROM goods_sample'
+
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+    return rows
+
+def insert_goods(name, price, explanation, category, stock):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = 'INSERT INTO goods_sample VALUES (default, %s, %s, %s, %s, %s)'
+    
+    cursor.execute(sql, (name, price, explanation, category, stock))
+    
+    connection.commit()
+    cursor.close()
+    connection.close()
+
 def insert_user(user_name, password):
     sql = 'INSERT INTO user_sample VALUES(default, %s, %s, %s)'
     

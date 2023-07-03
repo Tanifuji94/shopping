@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/list.css')}}">
+{% endblock %}
+
+
+{% block content %}
+  <h1>商品一覧</h1>
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>商品名</th>
+            <th>価格</th>
+            <th>商品説明</th>
+            <th>カテゴリー</th>
+            <th>在庫</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for goods in goods %}
+        <tr>
+            <td>{{ goods[0] }}</td>
+            <td>{{ goods[1] }}</td>
+            <td>{{ goods[2] }}</td>
+            <td>{{ goods[3] }}</td>
+            <td>{{ goods[4] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
