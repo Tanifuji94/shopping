@@ -61,6 +61,9 @@ def sample_list():
     goods_list = db.select_all_goods()
     return render_template('list.html', goods=goods_list)
 
+@app.route('/sample-register')
+def sample_register():
+    return render_template('goods.html')
 
 @app.route('/list_exe', methods=['POST'])
 def list_exe():
@@ -75,6 +78,11 @@ def list_exe():
     goods_list = db.select_all_goods()
     
     return render_template('list.html', goods=goods_list)
+
+@app.route('/cart')
+def cart():
+    cart = session.get('cart', [])
+    return render_template('cart.html', cart=cart)
 
 @app.route('/submit', methods=['POST'])
 def submit():

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- cart.html -->
+<ul>
+    {% for item in cart %}
+      <li>
+        <img src="{{url_for('static', filename='product_images/' + item[0] + '.jpg')}}" alt="{{ item[1] }}">
+        <h3>{{ item[1] }}</h3>
+        <p>{{ item[3] }}</p>
+      </li>
+</body>
+</html>

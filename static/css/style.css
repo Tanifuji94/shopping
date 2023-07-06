@@ -27,7 +27,7 @@ a.btn-border {
   a.btn-border:hover {
 	margin-top: 1000px;
 	color: #fff;
-	background: #000;
+	background: gray;
 	size: 10px;
   }
   .button {
@@ -46,5 +46,26 @@ a.btn-border {
   .button:hover{
 	color: #fff;
 	size: 10px;
-	background-color: #0000BB
+	background-color: black
   }
+
+  .search_box {
+	display: inline-block; 
+	position: relative;    
+  }
+  
+  .search_box::before {
+	content: "";          
+	width: 16px;           
+	height: 16px;        
+	background: url(./icon.png) no-repeat center center / auto 110%; 
+	display: inline-block; 
+	position: absolute;    
+	top: 10px;              
+	left: 8px;             
+  }
+  
+  .search_box input {
+	padding: 3px 0 3px 2em;
+  }
+  

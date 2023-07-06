@@ -13,14 +13,15 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             
-            <a class="nav-link" href="">商品一覧</a>
-            <a class="nav-link" href="sample_list">商品登録</a>
+            <a class="nav-link" href="{{url_for('sample_list')}}">商品一覧</a>
+            <a class="nav-link" href="{{url_for('sample_register')}}">商品登録</a>
             <a class="nav-link" href="">削除</a>
             <a class="nav-link" href="">カート</a>
-            <a class="nav-link">検索</a>
               <form action="" method="get" border=1 style="">
-              <input type="text" name="keyword">
-              <button type="submit" style="border: 1;">検索</button>
+              <div class="search_box">
+              <input type="search" autocomplete="on" list="list" placeholder="ここにキーワード">
+              </div>
+              <input type="submit" value="検索">
             </form>
           </div>
         </div>
