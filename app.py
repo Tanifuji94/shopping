@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import db, string, random
 from datetime import timedelta
+import sqlite3
+
+conn = sqlite3.connect('database.db')
+cursor = conn.cursor()
+
+conn.commit()
+
 
 app = Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
@@ -73,6 +80,19 @@ def list_exe():
     category = request.form.get('category')
     stock = request.form.get('stock')
     
+    if name == '':
+        error = '商品名が未入力です。'
+        return render_template('goods.html', error=error)
+    if price == '':
+        error = '商品の価格が未入力です。'
+        return render_template('goods.html', error=error)
+    if category == '':
+        error = '商品のカテゴリーが未入力です。'
+        return render_template('goods.html', error=error)
+    if stock == '':
+        error = '商品の在庫が未入力です。'
+        return render_template('goods.html', error=error)
+    
     db.insert_goods(name, price, explanation, category, stock)
     
     goods_list = db.select_all_goods()
@@ -92,6 +112,27 @@ def submit():
     message = request.form['message']
 
     return render_template('thank.html', name=name)
+
+@app.route('/delete_form')
+def delete_form():
+    return render_template('delete_form.html')
+
+@app.route('/delete_shopping', methods=['POST'])
+def delete_shopping():
+    shopping = request.form.get('id')
+    
+    if shopping == '':
+        error = '未入力です。'
+        return render_template('delete_form.html', error=error)
+        
+    count = db.delete_shopping(shopping)
+        
+    if count == 1:
+        msg = '削除が完了しました。'
+        return render_template('delete_form.html', msg=msg)
+    else:
+        error = '削除に失敗しました。'
+        return render_template('delete_form.html', error=error)
 
 @app.route('/register_exe', methods=['POST'])
 def register_exe():

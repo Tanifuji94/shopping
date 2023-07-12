@@ -21,7 +21,7 @@ def select_all_goods():
     connection = get_connection()
     cursor = connection.cursor()
 
-    sql = 'SELECT name, price, explanation, category, stock FROM goods_sample'
+    sql = 'SELECT id, name, price, explanation, category, stock FROM goods_sample'
 
     cursor.execute(sql)
     rows = cursor.fetchall()
@@ -40,6 +40,25 @@ def insert_goods(name, price, explanation, category, stock):
     connection.commit()
     cursor.close()
     connection.close()
+    
+def delete_shopping(id):
+    sql = 'DELETE FROM goods_sample WHERE id = %s'
+     
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (id,))
+        count = cursor.rowcount
+        connection.commit()
+        
+    except psycopg2.DatabaseError:
+        count = 0
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count
 
 def insert_user(user_name, password):
     sql = 'INSERT INTO user_sample VALUES(default, %s, %s, %s)'

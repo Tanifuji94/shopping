@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% for product in products %}
+<div class="product">
+  <h3>{{ product[1] }}</h3>
+  <p>価格: {{ product[2] }}円</p>
+  <p>{{ product[3] }}</p>
+  <p>在庫数: {{ product[6] }}</p>
+  <form action="/delete_product/{{ product[0] }}" method="post">
+    <button type="submit">削除</button>
+  </form>
+</div>
+{% endfor %}
+
+</body>
+</html>

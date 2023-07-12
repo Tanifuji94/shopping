@@ -6,12 +6,26 @@
   <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
   <link rel="icon" href="{{url_for('static', filename='favicon/favicon.ico')}}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <title>商品一覧画面</title>
+    <title>商品削除</title><br>
+    <h3 align="center">削除したい商品のIDを入力してください。</h3>
 </head>
 <body>
-  <h1>商品一覧</h1>
+    {%  if error != null %}
+        <p style="color:red; text-align: center">{{error}}</p>
+    {% endif %}
+    {%  if msg != null %}
+        <p style="color:blue; text-align: center">{{msg}}</p>
+    {% endif %}
+    <form action="{{url_for('delete_shopping')}}" method="post">
+        <div align="center">
+        ID:<input type = "text" name = "id">
+        <button type = "submit">削除</button>
+        </div>
+    </form>
+    <br><br>
+    <h2>商品一覧</h2>
   
-  <table class="table table-striped">
+    <table class="table table-striped">
     <thead>
         <tr>
             <th>id</th>

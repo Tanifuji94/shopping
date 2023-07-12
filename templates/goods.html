@@ -10,6 +10,9 @@
 </head>
 <body>
   <h1 align="center">商品登録</h1>
+  {% if error != null %}
+        <p style="color:red; text-align: center">{{error}}</p>
+  {% endif %}
   <div style="margin: 0 auto; padding: 30px; border: 7px double #333333; border-radius: 30px; width: 50%;">
   <form action="{{url_for('list_exe')}}" method="post">
     <h4 align="center">商品名：<input type="text" name="name"></h4><br>
