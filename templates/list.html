@@ -20,6 +20,7 @@
             <th>商品説明</th>
             <th>カテゴリー</th>
             <th>在庫</th>
+            <th>カート</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,12 @@
             <td>{{ goods[3] }}</td>
             <td>{{ goods[4] }}</td>
             <td>{{ goods[5] }}</td>
+            <td>
+              <form action="{{ url_for('add_to_cart', product_id=goods[0]) }}" method="POST">
+                  <input type="number" name="quantity" min="1" value="1">
+                  <input type="submit" value="カートに追加">
+              </form>
+          </td>
         </tr>
         {% endfor %}
     </tbody>

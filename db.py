@@ -30,6 +30,14 @@ def select_all_goods():
     connection.close()
     return rows
 
+def search_products(keyword):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM goods_sample WHERE name LIKE ?", ('%' + keyword + '%',))
+    products = cursor.fetchall()
+    for product in products:
+        print(f"商品名: {product[1]}, 価格: {product[2]}, 在庫数: {product[3]}")
+
 def insert_goods(name, price, explanation, category, stock):
     connection = get_connection()
     cursor = connection.cursor()
@@ -40,6 +48,17 @@ def insert_goods(name, price, explanation, category, stock):
     connection.commit()
     cursor.close()
     connection.close()
+    
+def select_product_by_id(id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = 'SELECT id, name, price, explanation, category, stock FROM goods_sample WHERE id = %s'
+    cursor.execute(sql, (id,))
+    product = cursor.fetchone()
+    cursor.close()
+    connection.close()
+    return product
+
     
 def delete_shopping(id):
     sql = 'DELETE FROM goods_sample WHERE id = %s'

@@ -16,7 +16,7 @@
             <a class="nav-link" href="{{url_for('sample_list')}}">商品一覧</a>
             <a class="nav-link" href="{{url_for('sample_register')}}">商品登録</a>
             <a class="nav-link" href="{{url_for('delete_form')}}">削除</a>
-            <a class="nav-link" href="">カート</a>
+            <a class="nav-link" href="{{url_for('cart_form')}}">カート</a>
               <form action="" method="get" border=1 style="">
               <div class="search_box">
               <input type="search" autocomplete="on" list="list" placeholder="ここにキーワード">
@@ -32,32 +32,26 @@
         </div>
         </nav>
         <main>
-          <section class="product-list">
-            <h2>商品一覧</h2>
-            <ul>
-              <li>
-                <img src="product1.jpg" alt="商品1">
-                <h3>商品1</h3>
-                <p>商品の説明や詳細などが記載されます。</p>
-                <button>カートに追加</button>
-              </li>
-              <li>
-                <img src="product2.jpg" alt="商品2">
-                <h3>商品2</h3>
-                <p>商品の説明や詳細などが記載されます。</p>
-                <button>カートに追加</button>
-              </li>
-              <!-- 他の商品のリストを追加 -->
-            </ul>
-          </section>
-      
-          <section class="cart">
-            <h2>カート</h2>
-            <ul>
-              <!-- カート内の商品のリストを表示 -->
-            </ul>
-            <button>注文する</button>
-          </section>
+          <!-- ... (previous code) ... -->
+<section class="cart">
+  <h2>カート</h2>
+  <ul>
+      {% for item in session['cart'] %}
+      <li>
+          <img src="{{ url_for('static', filename='product_images/' + item['product_id'] + '.jpg') }}" alt="{{ item['name'] }}">
+          <p>{{ item['name'] }}</p>
+          <p>Price: {{ item['price'] }}</p>
+          <p>Quantity: {{ item['quantity'] }}</p>
+          <form action="{{ url_for('remove_from_cart', product_id=item['product_id']) }}" method="POST">
+              <input type="submit" value="Remove">
+          </form>
+      </li>
+      {% endfor %}
+  </ul>
+  <button>注文する</button>
+</section>
+<!-- ... (remaining code) ... -->
+
         </main>
     </header>
     <footer class="footer bg-light fixed-bottom">

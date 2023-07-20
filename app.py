@@ -72,6 +72,42 @@ def sample_list():
 def sample_register():
     return render_template('goods.html')
 
+@app.route('/cart_form')
+def cart_form():
+    return render_template('cart.html')
+
+@app.route('/add_to_cart/<int:product_id>', methods=['POST'])
+def add_to_cart(product_id):
+    quantity = int(request.form['quantity'])
+    
+    # カートがセッションに存在しない場合、空のリストを初期化
+    cart = session.get('cart', [])
+    
+    # カートに追加する商品情報を取得
+    product = db.select_product_by_id(product_id)
+    
+    # カートに商品を追加
+    cart.append({
+        'product_id': product[0],
+        'name': product[1],
+        'price': product[2],
+        'quantity': quantity
+    })
+    
+    # カート情報をセッションに保存
+    session['cart'] = cart
+    
+    return render_template('cart.html')
+
+@app.route('/remove_from_cart/<int:product_id>', methods=['POST'])
+def remove_from_cart(product_id):
+    cart = session.get('cart', [])
+    # Remove the item from the cart by matching the product_id
+    cart = [item for item in cart if item['product_id'] != product_id]
+    session['cart'] = cart
+    return render_template('cart.html')
+
+
 @app.route('/list_exe', methods=['POST'])
 def list_exe():
     name = request.form.get('name')
