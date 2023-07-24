@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{url_for('static', filename='favicon/home.ico')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
 </head>
 <body>
-    <h1>Shopping Cart</h1>
+    <h1 align="center">Shopping Cart</h1>
     <ul>
-        {% for item in cart %}
+        {% for item in goods %}
             <li>
-                <img src="{{ url_for('static', filename='product_images/' + item['product_id'] + '.jpg') }}" alt="{{ item['name'] }}">
+                <img src="{{ url_for('static', filename='product_images/' + str(item['product_id']) + '.jpg') }}" alt="{{ item['name'] }}">
                 <p>{{ item['name'] }}</p>
                 <p>Price: {{ item['price'] }}</p>
                 <p>Quantity: {{ item['quantity'] }}</p>
@@ -21,6 +22,7 @@
         {% endfor %}
     </ul>
     <div align="center" style="margin-top: 30px">
-      <a href="{{url_for('mypage')}}" class="btn btn-border">戻る</a>
-  </div></body>
+        <a href="{{ url_for('mypage') }}" class="btn btn-border">戻る</a>
+    </div>
+</body>
 </html>

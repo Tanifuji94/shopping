@@ -17,11 +17,6 @@
             <a class="nav-link" href="{{url_for('sample_register')}}">商品登録</a>
             <a class="nav-link" href="{{url_for('delete_form')}}">削除</a>
             <a class="nav-link" href="{{url_for('cart_form')}}">カート</a>
-              <form action="" method="get" border=1 style="">
-              <div class="search_box">
-              <input type="search" autocomplete="on" list="list" placeholder="ここにキーワード">
-              </div>
-              <input type="submit" value="検索">
             </form>
           </div>
         </div>
@@ -32,25 +27,7 @@
         </div>
         </nav>
         <main>
-          <!-- ... (previous code) ... -->
-<section class="cart">
-  <h2>カート</h2>
-  <ul>
-      {% for item in session['cart'] %}
-      <li>
-          <img src="{{ url_for('static', filename='product_images/' + item['product_id'] + '.jpg') }}" alt="{{ item['name'] }}">
-          <p>{{ item['name'] }}</p>
-          <p>Price: {{ item['price'] }}</p>
-          <p>Quantity: {{ item['quantity'] }}</p>
-          <form action="{{ url_for('remove_from_cart', product_id=item['product_id']) }}" method="POST">
-              <input type="submit" value="Remove">
-          </form>
-      </li>
-      {% endfor %}
-  </ul>
-  <button>注文する</button>
-</section>
-<!-- ... (remaining code) ... -->
+         
 
         </main>
     </header>

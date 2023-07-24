@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import db, string, random
 from datetime import timedelta
-import sqlite3
+import sqlite3, keyword
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
@@ -54,7 +54,17 @@ def mypage():
 @app.route('/search')
 def sample_search():
     return render_template('search.html')
-    
+
+@app.route('/keyword', methods=['GET', 'POST'])
+def search_form():
+    if request.method == 'POST':
+        keyword = request.form['keyword']
+        rows = db.select_all_search(keyword)
+        return render_template('list.html', goods=rows, keyword=keyword)
+    else:
+        rows = db.select_all_search()
+        return render_template('list.html', goods=rows)
+        
 @app.route('/register')
 def register_form():
     return render_template('register.html')
@@ -74,19 +84,22 @@ def sample_register():
 
 @app.route('/cart_form')
 def cart_form():
-    return render_template('cart.html')
+    cart = session.get('cart', [])
+    return render_template('cart.html', goods=cart) 
 
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
     quantity = int(request.form['quantity'])
     
-    # カートがセッションに存在しない場合、空のリストを初期化
+    return redirect(url_for('cart_form'))
+
+def add_to_cart(product_id):
+    quantity = int(request.form['quantity'])
+    
     cart = session.get('cart', [])
     
-    # カートに追加する商品情報を取得
     product = db.select_product_by_id(product_id)
     
-    # カートに商品を追加
     cart.append({
         'product_id': product[0],
         'name': product[1],
@@ -94,7 +107,6 @@ def add_to_cart(product_id):
         'quantity': quantity
     })
     
-    # カート情報をセッションに保存
     session['cart'] = cart
     
     return render_template('cart.html')
@@ -102,7 +114,6 @@ def add_to_cart(product_id):
 @app.route('/remove_from_cart/<int:product_id>', methods=['POST'])
 def remove_from_cart(product_id):
     cart = session.get('cart', [])
-    # Remove the item from the cart by matching the product_id
     cart = [item for item in cart if item['product_id'] != product_id]
     session['cart'] = cart
     return render_template('cart.html')
@@ -151,10 +162,12 @@ def submit():
 
 @app.route('/delete_form')
 def delete_form():
-    return render_template('delete_form.html')
+    goods_list = db.select_all_goods()
+    return render_template('delete_form.html', goods=goods_list)
 
 @app.route('/delete_shopping', methods=['POST'])
 def delete_shopping():
+    goods_list = db.select_all_goods()
     shopping = request.form.get('id')
     
     if shopping == '':

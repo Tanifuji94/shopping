@@ -11,6 +11,22 @@ def get_salt():
     salt = ''.join(random.choices(charset, k=30))
     return salt
 
+def select_all_search(keyword=None):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = 'SELECT id, name, price, explanation, category, stock FROM goods_sample'
+    if keyword:
+        sql += ' WHERE name LIKE %s'
+        keyword = f'%{keyword}%'  
+        cursor.execute(sql, (keyword,))
+    else:
+        cursor.execute(sql)
+
+    rows = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return rows
+
 def get_hash(password, salt):
     b_pw = bytes(password, 'utf-8')
     b_salt = bytes(salt, 'utf-8')
